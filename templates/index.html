@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/javascript" href="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0XKSN1VEHS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0XKSN1VEHS');
+</script>
+
+</head>
+<body style="background-color: #E7E3E3;">
+    <!-- メニューバー -->
+    <div class="ui massive top fixed menu">
+        <div class="item">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/icon.png') }}" style="width: 25px;">
+            </a>
+        </div>
+            <a class="item" href="{{ url_for('index') }}"><b>ワクチン情報</b></a>
+            <a class="item" href="{{ url_for('status') }}"><b>ワクチンの摂取状況</b></a>
+            <a class="item" href="{{ url_for('update') }}"><b>ワクチン証明書更新</b></a>
+            <a class="item" href="{{ url_for('evidence') }}"><b>ワクチン証明書一覧</b></a>
+            <a class="item" href="{{ url_for('send_evi') }}"><b>ワクチン証明書送付</b></a>
+    </div>
+    <!-- ***************** -->
+    <div hidden>
+        
+    </div>
+    <div class="ui main container" style="margin-top:80px;">
+        <div class="ui link cards" style="margin-left: 110px;">
+            {% for i in vaccine_dict %}
+            <div class="card" style="width:300px;">
+                
+                <div class="image">
+                    <a href="{{ url_for('detail', vaccine_id=i) }}">
+                        <img src="data:image/png;base64,{{vaccine_dict[i][1]}}" style="width:300px;">
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="header">
+                        {{ vaccine_dict[i][0] }}
+                    </div>
+                    <div class="description">
+                        {{short_txt_dict[i]}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

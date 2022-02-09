@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+</head>
+<body style="background-color: #E7E3E3;">
+    <!-- メニューバー -->
+    <div class="ui massive top fixed menu">
+        <div class="item">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/icon.png') }}" style="width: 25px;">
+            </a>
+        </div>
+            <a class="item" href="{{ url_for('index') }}"><b>ワクチン情報</b></a>
+            <a class="item" href="{{ url_for('status') }}"><b>ワクチンの摂取状況</b></a>
+            <a class="item" href="{{ url_for('update') }}"><b>ワクチン証明書更新</b></a>
+            <a class="item" href="{{ url_for('evidence') }}"><b>ワクチン証明書一覧</b></a>
+            <a class="item" href="{{ url_for('send_evi') }}"><b>ワクチン証明書送付</b></a>
+    </div>
+    <!-- ***************** -->
+    <div hidden>
+        
+    </div>
+    <div class="ui main container">
+        <div class="ui raised segement" style="margin-top: 200px;">
+            <div class="ui green label">
+                <h2>接種証明書アップロード</h2>
+            </div>
+            <div class="ui raised segment">
+                <table>
+                    <tbody>
+                        <form action="/s1922074/update_comp" method="post" enctype="multipart/form-data">
+                            <tr><td>　</td></tr>
+                            <tr>
+                                <label>
+                                    <td><input type="file" name="update_img" accept="image/png" class="size_ch"></td><td class="size_ch">【接種証明書をアップロード(PNG限定)】</td>
+                                </label>
+                            </tr>
+                            <tr><td>　</td></tr>
+                            <tr>
+                                <td>
+                                    <select name="update_name" class="size_ch">
+                                        {% for i in vaccine_dict %}
+                                            <option value="{{i}}">{{vaccine_dict[i][0]}}</option>
+                                        {% endfor%}
+                                    </select>
+                                </td>
+                                <td class="size_ch">
+                                    【接種ワクチンを選択】
+                                </td>
+                            </tr>
+                            <tr><td>　</td></tr>
+                            <tr>
+                                <td>
+                                    <input type="date" class="size_ch" name="update_date">
+                                </td>
+                                <td class="size_ch">
+                                    【接種日を選択】
+                                </td>
+                            </tr>
+                            <tr><td>　</td></tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <button type="submit" class="ui fluid green button" style="font-size: 25px; ">アップロード</button>
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

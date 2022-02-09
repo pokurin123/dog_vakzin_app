@@ -1,0 +1,10 @@
+.ui.massive.menu {
+    background-color: #009933;
+}
+.ui.menu .item {
+    color:#fff !important;
+}
+
+button.item {
+    border: none;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/detail.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+    
+    <!-- js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+</head>
+<body style="background-color: #E7E3E3;">
+    <!-- メニューバー -->
+    <div class="ui massive top fixed menu">
+        <div class="item">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/icon.png') }}" style="width: 25px;">
+            </a>
+        </div>
+            <a class="item" href="{{ url_for('index') }}"><b>ワクチン情報</b></a>
+            <a class="item" href="{{ url_for('status') }}"><b>ワクチンの摂取状況</b></a>
+            <a class="item" href="{{ url_for('update') }}"><b>ワクチン証明書更新</b></a>
+            <a class="item" href="{{ url_for('evidence') }}"><b>ワクチン証明書一覧</b></a>
+            <a class="item" href="{{ url_for('send_evi') }}"><b>ワクチン証明書送付</b></a>
+    </div>
+    <!-- ***************** -->
+    <div hidden>
+        
+    </div>
+    <div class="ui main container" style="margin-top:140px; margin-left:110px;">
+        <div class="ui raised segment" style="top: 10px;">
+            <div class="ui green label">
+                <h2>接種済み</h2>
+            </div>
+            <div class="ui raised segment">
+                <div class="ui grid">
+                    {% for i in fin_count %}
+                        <div class="column" style="text-align: center; width:150px;">
+                            <!-- vaccine_dict[fin_list[i]][1] -->
+                            <br>
+                            <img src="data:image/png;base64,{{vaccine_dict[fin_list[i]][1]}}" style="border-radius: 50%; width: 90px; height: 90px;"><br>
+                            <a href="{{ url_for( 'detail', vaccine_id=fin_list[i] ) }}" style="font-size: 20px; font-weight:bold;">
+                                {{vaccine_dict[fin_list[i]][0]}}
+                            </a>
+                            <p style="font-size: 15px;">{{fin_date_list[i]}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- 未摂取 -->
+        <div id="change_high" class="ui raised segment" style="top: 10px;">
+            <div class="ui green label">
+                <h2>未接種</h2>
+            </div>
+            <div class="ui raised segment">
+                <div class="ui grid">
+                    {% for i in yet_count %}
+                        <div class="column" style="text-align: center; width:150px;">
+                            <br>
+                            <img src="data:image/png;base64,{{vaccine_dict[yet_list[i]][1]}}" style="border-radius: 50%; width: 90px; height: 90px;"><br>
+                            <a href="{{ url_for( 'detail', vaccine_id=yet_list[i] ) }}" style="font-size: 20px; font-weight:bold;">
+                                {{vaccine_dict[yet_list[i]][0]}}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
